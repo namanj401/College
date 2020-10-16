@@ -1,0 +1,91 @@
+	#include<bits/stdc++.h>	//importing libraries
+using namespace std;
+int n;					//declaring n to store stack size
+class mystack{			//declaring class mystack
+	
+	
+	
+	public:
+		//member variables
+    	int top=-1;			//initializing top with -1
+		int *a=new int[n];	//declaring array of size n
+		
+		//member functions
+		void push(int x);	
+		int pop();
+		void peek();
+		void isFull();
+		void isempty();
+		void stackTop();
+		void display();
+};
+void mystack::push(int x)	//push function begins
+{
+	if(top>=n-1)			//checking if top is greater than the size 
+	cout<<"Stack overflow"<<endl;	//if yes then print stack overflow
+	else					
+	{
+		top++;				//else increase top to one step ahead
+		a[top]=x;			//and store the value in it
+	}
+}
+int mystack::pop()	//function to pop an element out of the stack
+{
+	if(top==-1)		//checking if top equals -1
+	cout<<"stack empty"<<endl;	//if yes then print stack empty message
+	else
+	{				
+		int x=a[top];	//else store the topmost element in x
+		top--;			//move top one step behind
+		return x;		//return the popped element
+	}
+}
+void mystack::isFull()		//function to check if stack is full
+{
+	if(top==n-1)			//checking if top equals size-1
+	cout<<"stack is full"<<endl;//if yes then print stack full message
+	else
+	cout<<"stack is not full"<<endl;//else then print stack not full message
+	
+}
+void mystack::isempty()		//function to check if stack is empty
+{
+	if(top==-1)				//checking if top equals size-1
+	cout<<"stack is empty "<<endl;	//if yes then print stack empty message
+	else
+	cout<<"stack is not empty"<<endl;	//else print stack not empty message
+	
+}
+void mystack::peek()	//function to peek 
+{
+	cout<<"the top element is "<<a[top]<<endl;	//printing the top element
+	
+}
+void mystack::stackTop()	//function to print top element
+{
+	cout<<"stack top is "<<a[top]<<endl;	//printing top element
+}
+
+int main()	//main function begins
+{	int *b=new int[n];		//delaring array of size n
+	cout<<"enter stack size "<<endl;
+	cin>>n;				//taking size from user
+	cout<<"enter elements to pushed"<<endl;
+	for(int i=0;i<n;i++)
+	cin>>b[i];			//taking elements to be pushed from the user
+	
+	mystack s;			//making object of type mystack
+	for(int i=0;i<n;i++)
+	{
+		s.push(b[i]);	//pushing elements into stack 
+		cout<<b[i]<<" pushed into stack "<<endl;
+	}
+	int c=s.pop();	//calling function to pop elemnt out of the stack
+	cout<<c<<" popped out from stack "<<endl;
+	s.isFull();		//calling function to check if stack is full
+	s.isempty();	//calling function to check if stack is empty
+	s.peek();		//calling function to peek
+	s.stackTop();	//calling function to print stacktop
+	
+	return 0;
+}

@@ -1,0 +1,139 @@
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+class myqueue{
+	
+	
+	
+	public:
+			//member variables
+    	int front=-1;
+    	int rear=-1;
+		int *a=new int[n];
+			//member functions
+		void enqueue(int x);
+		int dequeue();
+		void isFull();
+		void isempty();
+		void display();
+};	
+void myqueue::enqueue(int x)	//function to enqueue an element in the queue
+{
+	if(front==-1)			//if queue is empty
+	{
+		front++;			//make front and rear 0
+		rear++;
+		a[rear]=x;			//enqueue the element
+	}
+	else				//if queue is not empty
+	{
+		rear++;			//increase the rear by 1
+		a[rear]=x;		//enqueue the element at rear position
+	}
+	
+}
+int myqueue::dequeue()  //function to dequeue an element
+{
+	if(front==-1)		//if front is -1 then the queue is empty
+	{		
+		return -1;
+	}
+	else		
+	{
+		int x=a[front];  //storing the front element in to return
+		for(int i=0;i<rear;i++)
+		a[i]=a[i+1];	//shifting the remaining elements 
+		rear--;			//moving rear one position behind
+		return x;		//retruning the dequeued element
+	}
+}
+void myqueue::isFull()		//function to check if queue is full
+{
+	if(rear==n-1)			//rear is one less than size then queue us full
+	cout<<"queue is Full"<<endl;
+	else
+	cout<<"queue is not Full"<<endl;
+	
+}
+void myqueue::isempty()		//function to check if queue is empty
+{
+	if(front==-1)			//if front equals -1 then queue is empty
+	cout<<"queue is empty "<<endl;
+	else
+	cout<<"queue is not empty"<<endl;
+}
+void myqueue::display()			//function to check if queue is empty
+{
+	cout<<"the queue is "<<endl;
+	for(int i=front;i<=rear;i++)
+	cout<<a[i]<<" ";
+	cout<<endl;
+}
+int main()		//main function
+{
+	cout<<"enter queue size "<<endl;
+	cin>>n;		//taking queue size from the user
+	myqueue q;		//making object of type myqueue
+	//giving user  the following choices
+	cout<<"Press A for enqueue operation "<<endl;
+	cout<<"Press B for dequeue operation "<<endl;
+	cout<<"Press C to check if queue is full "<<endl;
+	cout<<"Press D to check if queue is empty "<<endl;
+	cout<<"Press E to display the Queue "<<endl;
+	while(1)	//infinite loop
+	{
+	
+	char b;		//declaring character to store user's choice
+	cout<<"\nEnter choice "<<endl;
+	cin>>b;		//taking choice from the user
+	switch(b)	//switch case
+	{
+		case 'a':	//if choice is A
+			{	
+				int m;	//declaring variable to store element to be enqueued
+				cout<<"enter element to be enqueued "<<endl;
+				cin>>m;		//taking element to be pushed
+				q.enqueue(m);	//calling the push function
+				cout<<m<<" enqueued in the queue"<<endl;
+				break;	
+			}
+		case 'b':		//if choice is B
+			{
+				int j=q.dequeue();	//calling the pop function
+				if(j==-1)			//if jequal -1 then queue is empty
+				cout<<"queue is empty "<<endl;
+				else
+				cout<<j<<" dequeued from the queue"<<endl;
+				break;
+			}
+		case 'c':		//if choice C
+			{
+				q.isFull();	//calling the isFull fuction
+				break;
+			}
+		case 'd':		//if choice is D
+			{
+				q.isempty();	//calling the isempty function
+				break;
+			}
+		case 'e':		//if choice is E
+			{
+				q.display();	//displaying the stack
+				break;
+			}
+		default:	//if choice doesn't match the given options
+			{
+				cout<<"Invalid choice "<<endl;
+			}
+			
+	}
+	int g;
+	cout<<"Press 1 to CONTINUE or 2 to EXIT "<<endl;
+	cin>>g;		//taking user's choice
+	if(g==1)	//if choice is 1 the continue
+	continue;
+	else		//else end the program
+	exit(0);
+	}
+	
+}

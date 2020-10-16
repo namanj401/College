@@ -1,0 +1,99 @@
+#include <bits/stdc++.h> 
+using namespace std;
+int n; 
+stack<int> s1, s2; 
+class myqueue{
+		
+	public:
+			//member variables
+    	
+					//member functions
+		void enqueue(int x);
+		int dequeue();
+		//int stackpop(stack<int> s);
+		void isFull();
+		void isempty();
+		//void display(stack<int> s);
+		//void reversedisplay(stack<int> s);
+	};
+void myqueue::enqueue(int x)
+{
+	// Push item into the first stack 
+	try{
+		if(s1.size()>n)
+		throw 1;
+	}
+	catch (int i)
+	{
+		cout<<"exception: queue is full"<<endl;
+	}
+		s1.push(x);
+}
+int myqueue::dequeue()
+{
+	// if both stacks are empty 
+	try{
+	
+		if (s1.empty() && s2.empty()) { 
+			throw 1; 
+		} 
+	}
+	catch (int i)
+	{
+		cout<<"exception: queue is empty"<<endl;
+	}
+
+		// if s2 is empty, move 
+		// elements from s1 
+		if (s2.empty()) { 
+			while (!s1.empty()) { 
+				s2.push(s1.top()); 
+				s1.pop(); 
+			} 
+		} 
+
+		// return the top item from s2 
+		int x = s2.top(); 
+		s2.pop(); 
+		return x; 
+}
+void myqueue::isFull()
+{
+	if(s1.size()==n)
+	cout<<"queue is full"<<endl;
+	else
+	cout<<"queue is not full"<<endl;
+}
+void myqueue::isempty()
+{
+	if(s1.empty()&&s2.empty())
+	cout<<"queue is empty"<<endl;
+	else
+	cout<<"queue is not empty"<<endl;
+}
+// Driver code 
+int main() 
+{ 	
+	cout<<"enter queue size "<<endl;
+	cin>>n;		//taking queue size from the user
+	myqueue q;		//making object of type myqueue
+	
+	q.enqueue(3);
+	q.enqueue(2);
+	q.enqueue(5);
+	q.enqueue(9);
+	q.enqueue(7);
+	q.enqueue(6);
+	
+	q.isFull();
+	q.isempty();
+	int x=q.dequeue();
+	cout<<"queue after dequeue is"<<endl;
+	cout << q.dequeue() << " "; 
+	cout << q.dequeue() <<" "; 	
+	cout << q.dequeue() << " "; 
+	cout << q.dequeue() <<" "; 
+	cout << q.dequeue() <<" ";
+
+	return 0; 
+} 

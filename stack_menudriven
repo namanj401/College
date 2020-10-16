@@ -1,0 +1,166 @@
+#include<bits/stdc++.h> 	//importing libraries	
+using namespace std;
+int n;					//declaring n to store size of the stack
+struct Node				//creating node of struct data type
+{	
+	public:
+	int data;			//declaring data part
+	struct Node *next;	//declaring pointer to store address of next node
+};
+class mystack{
+
+	public:
+    	//member variables
+    	struct Node *top=NULL;
+		int *a=new int[n];
+		//member functions
+		void push(int x);
+		int pop();
+		void peek();
+		void isFull();
+		void isempty();
+		void stackTop();
+		void display();
+};
+void display(Node *node)	//display function begins
+{
+	while(node!= NULL)		//loop till node not equals NULL
+	{
+		cout<<node->data<<" ";	//printing data of node
+		node=node->next;		//making node to pint at next node
+	}cout<<endl;
+}
+void mystack::push(int x)	//function to push element into the stack
+{
+	Node *new_node=new Node;//making a new node for every element
+	if(top==NULL)			//checking if stack is empty
+	{
+		new_node->data=x;	//if yes then putting the element into the data part of the node
+		new_node->next=NULL;//storing NULL into pointer part
+		top=new_node;		//making top to point towards first node
+	}
+	else{					//else if stack is not empty
+	new_node->data=x;		//put element into the data part of the node
+	new_node->next=top;		//insert the the new node before the top node
+	top=new_node;			//make it the top node
+	}
+}
+int mystack::pop()	//function to pop element out of the stack
+{	
+	if(top==NULL)	//checking if stack is empty
+	return -1;		//if yes then return -`
+	else
+	{
+		int v=top->data;	//else taking data from the top node 
+		struct Node *temp2=top;	//making a temporary node to store the top node
+		top=top->next;	//moving top pointer one step ahead
+		free(temp2);	//freeing the memory
+		return v;		//returning the popped element
+		 	
+	}
+	
+}
+void mystack::isFull()//function to check if stack is full 
+{
+	struct Node *temp=top;int c=0;//making a temporary node to point towards the top node
+	while (temp->next!=NULL)	//loop till end of the linked list
+	{
+		temp=temp->next;
+		c++;					//counting nuber of nodes
+	}
+	if(c==n)			
+	cout<<"stack is Full"<<endl;
+	else
+	cout<<"stack is not full"<<endl;
+}
+void mystack::isempty() //function to if the stack is empty
+{
+	if(top==NULL)		//checking  if top pointer is NULL
+	cout<<"stack is empty"<<endl; //if yes then print stack empty message
+	else
+	cout<<"stack is not empty"<<endl;
+}
+void mystack::display() //function to display the stack
+{	
+	struct Node *temp=top;	//making a temporary node and storing top in it
+	while(temp!=NULL)		
+	{
+		cout<<temp->data<<" ";//printing the data of each nodes
+		temp=temp->next;
+	}
+	cout<<endl;
+}
+
+int main()	//main function
+{
+	cout<<"enter stack size"<<endl;
+	cin>>n;		//taking stack size from the user
+		
+		
+	mystack s;		//making object of type mystack
+	//giving user  the following choices
+	cout<<"Press A for push operation "<<endl;
+	cout<<"Press B for pop operation "<<endl;
+	cout<<"Press C to check if stack is full "<<endl;
+	cout<<"Press D to check if stack is empty "<<endl;
+	cout<<"Press E to display the current stack "<<endl;
+	while(1)	//infinite loop
+	{
+	
+	char p;		//declaring character to store user's choice
+	cout<<"\nEnter choice "<<endl;
+	cin>>p;		//taking choice from the user
+	switch(p)//switch case
+	{
+		case 'a'://if choice is A
+			{	
+				int m;		//declaring variable to store element to be pushed
+				cout<<"enter element to be pushed "<<endl;
+				cin>>m;			//taking element to be pushed
+				s.push(m);			//calling the push function
+				cout<<m<<" pushed in the stack"<<endl;
+				break;	
+			}
+		case 'b':		//if choice is B
+			{
+				int j=s.pop();		//calling function to pop out an element
+				if(j==-1)			//if j equals -1 then stack is empty
+				cout<<"stack is empty "<<endl;
+				else
+				cout<<j<<" popped from the stack"<<endl;
+				break;
+			}
+		case 'c':		//if choice is C
+			{
+				s.isFull();		//calling the isFull function
+				break;
+			}
+		case 'd':	//if choice is D
+			{
+				s.isempty();	//calling isempty function
+				break;
+			}
+		case 'e': //if choice is E then display the stack
+			{	
+				cout<<"the current stack is"<<endl;
+				s.display();
+				break;
+			}
+		default:	//if the choice doesn't match any option
+			{
+				cout<<"Invalid choice "<<endl;
+			}
+			
+	}
+	int g;
+	cout<<"Press 1 to CONTINUE or 2 to EXIT "<<endl;
+	cin>>g;   //taking choice from the user
+	if(g==1)	//if choice is 1 continue the program
+	continue;
+	else		//if choice is 2 end the program
+	exit(0);
+	}
+	
+	return 0;
+	
+}

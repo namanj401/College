@@ -1,0 +1,54 @@
+    #include<bits/stdc++.h>
+    using namespace std;
+    typedef pair<long long int,long long int> pa;
+    #define resize(A) A.resize(unique(A.begin(), A.end()) - A.begin())
+    //ios_base::sync_with_stdio(false);cin.tie(NULL);
+    /*ifstream cin("input.txt");
+    ofstream cout("output.txt");*/
+    #define pb push_back
+    #define  MAX 10000009
+    #define ll long long int
+    long long int MOD=998244353;
+    long long int mod=1e9+7;
+    long long int INF=1e18;
+    ll dx[]={1,-1,0,0};
+    ll dy[]={0,0,1,-1};
+    vector<ll>pr(MAX);
+    vector<bool> p(MAX,0);
+    int main()
+    {
+        ios_base::sync_with_stdio(false);cin.tie(NULL);
+        for(int i=2;i<MAX;i++)
+        {
+            if(p[i]==0)
+            {
+                pr[i]=i;
+                for(int j=2*i;j<MAX;j+=i)
+                {
+                    p[j]=1;
+                    pr[j]=i;
+                }
+            }
+        }
+        ll n;
+        cin>>n;
+        vector<pa> ans;
+        while(n--)
+        {
+            ll a;
+            cin>>a;
+            ll c=a;
+            while(a%pr[c]==0)
+                a/=pr[c];
+            if(a==1)
+            ans.pb({-1,-1});
+            else
+            ans.pb({a,c/a});
+        }
+        for(auto j:ans)
+            cout<<j.first<<" ";
+        cout<<endl;
+        for(auto j:ans)
+            cout<<j.second<<" ";
+        return 0;
+    }

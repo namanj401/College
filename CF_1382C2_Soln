@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef pair<long long int,long long int> pa;
+#define resize(A) A.resize(unique(A.begin(), A.end()) - A.begin())
+//ios_base::sync_with_stdio(false);cin.tie(NULL);
+/*ifstream cin("input.txt");
+ofstream cout("output.txt");*/
+#define pb push_back
+#define  MAX 11
+#define ll long long int
+long long int MOD=998244353;
+long long int mod=1e9+7;
+long long int INF=1e18;
+ll dx[]={1,-1,0,0};
+ll dy[]={0,0,1,-1};
+void flip(string &s,int idx)
+{
+    for(int i=0;i<=idx;i++)
+    {if(s[i]=='0')s[i]='1';else s[i]='0';}
+}
+int main()
+{
+    ios_base::sync_with_stdio(false);cin.tie(NULL);
+    ll t;
+    cin>>t;
+    while(t--)
+    {
+        ll n;
+        cin>>n;
+        string s,t;
+        cin>>s>>t;
+        vector<ll> ans;
+        ll str=n-1,end=0,k=n-1;
+        ll r=0,f=0;
+        while(k>=0)
+        {
+            char ch=s[str];
+            if(r%2==1)
+            {
+                if(ch=='1')
+                ch='0';
+                else
+                {
+                    ch='1';
+                }
+            }
+            if(ch==t[k])
+            {
+                k--;
+                if(str<end)
+                str++;
+                else
+                {
+                    str--;
+                }
+                
+                continue;
+            }
+            else
+            {
+                //cout<<r<<endl;
+                char cha=s[end];
+                if(r%2==1)
+            {
+                if(cha=='1')
+                cha='0';
+                else
+                {
+                    cha='1';
+                }
+            }
+                //cout<<ch<<" "<<cha<<endl;
+                if(cha!=ch&&str!=end)
+                {
+                    ans.pb(1);
+                }
+                ans.pb(k+1);
+                r++;
+                f++;
+                    swap(str,end);
+                    if(str<end)
+                    str++;
+                    else
+                    {
+                        str--;
+                    }
+                
+                k--;
+            }
+            
+        }        
+        cout<<ans.size()<<" ";
+        for(auto j:ans)
+        cout<<j<<" ";
+        cout<<endl;
+    }
+    return 0;
+}
